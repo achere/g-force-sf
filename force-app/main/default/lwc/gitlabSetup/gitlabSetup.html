@@ -1,0 +1,68 @@
+<template>
+    <div class="slds-is-relative slds-form">
+        <p>Provide parameters for GitLab connection</p>
+        <div class="slds-grid slds-grid_vertical">
+            <lightning-input
+                type="text"
+                name="hostname"
+                value={data.hostname}
+                onblur={handleChange}
+                label="Hostname"
+                required
+                pattern="^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$"
+                message-when-pattern-mismatch="Invalid characters encountered"
+                class="input slds-col"
+            ></lightning-input>
+            <lightning-input
+                type="password"
+                name="token"
+                placeholder={data.tokenPlaceholder}
+                onblur={handleChange}
+                required
+                label="Project Token"
+                class="input slds-col"
+            ></lightning-input>
+            <div
+                class="slds-col slds-grid slds-grid_align-spread slds-grid_vertical-align-start slds-m-around_small"
+            >
+                <lightning-button
+                    onclick={save}
+                    label={buttonLabel}
+                    variant="brand"
+                    class="slds-col"
+                ></lightning-button>
+                <template if:true={isNamedCredCreated}>
+                    <lightning-input
+                        type="toggle"
+                        checked={isNamedCredEnabled}
+                        disabled
+                        label="Callouts"
+                        message-toggle-active="Enabled"
+                        message-toggle-inactive="Disabled"
+                        class="slds-col"
+                    ></lightning-input>
+                </template>
+            </div>
+        </div>
+
+        <template if:true={isNamedCredCreated}>
+            <div if:false={isNamedCredEnabled} class="slds-text-longform">
+                <p>
+                    Dynamically created named credentials require manual
+                    activation. Please follow these steps:
+                </p>
+                <ol class="slds-list_ordered">
+                    <li>
+                        Navigate to the&nbsp;
+                        <a href={namedCredUrl} target="_blank"
+                            >Named Credential page</a
+                        >
+                    </li>
+                    <li>Click "Edit"</li>
+                    <li>Check "Enabled for Callouts"</li>
+                    <li>Click "Save"</li>
+                </ol>
+            </div>
+        </template>
+    </div>
+</template>

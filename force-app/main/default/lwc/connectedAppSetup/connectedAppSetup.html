@@ -1,0 +1,28 @@
+<template>
+    <div class="slds-is-relative slds-text-longform">
+        <p>Please set the G-Force Connected App's "Run As" User</p>
+        <ol class="slds-list_ordered">
+            <li>
+                Navigate to the&nbsp;
+                <a href="/lightning/setup/NavigationMenus/home" target="_blank">
+                    App Manager</a
+                >
+            </li>
+            <li>
+                Click on the caret sign next to the G-Force Connected App and
+                click "Manage"
+            </li>
+            <li>Click "Edit Policies"</li>
+            <li>
+                In the "Client Credential Flow" section, in the "Run As" lookup
+                select a User with "View All Data" permission
+            </li>
+            <li>Click "Save"</li>
+        </ol>
+        <lightning-input
+            type="checkbox"
+            label="I have completed these steps"
+            onclick={handleCheckbox}
+        ></lightning-input>
+    </div>
+</template>

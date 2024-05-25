@@ -1,0 +1,65 @@
+<template>
+    <lightning-card
+        title="Connect to a Repository"
+        class="slds-grid_vertical-stretch"
+    >
+        <c-config-step
+            lwc:if={steps.connected_app}
+            is-loading={isLoading}
+            title="Connected App Setup"
+        >
+            <c-connected-app-setup
+                onconnectedappreportedsetup={handleConnectedAppSetup}
+            ></c-connected-app-setup>
+        </c-config-step>
+        <c-config-step
+            lwc:elseif={steps.gitlab_token}
+            title="Connect to GitLab"
+            is-loading={isLoading}
+        >
+            <c-gitlab-setup
+                initial-data={gitlabData}
+                onsave={handleSaveNamedCred}
+            ></c-gitlab-setup>
+        </c-config-step>
+        <c-config-step
+            lwc:elseif={steps.claim_branch}
+            title="Claim Branch"
+            is-loading={isLoading}
+        >
+            <c-claim-branch onsetloading={handleSetLoading}></c-claim-branch>
+        </c-config-step>
+
+        <div slot="footer" class="slds-p-around_medium">
+            <lightning-progress-indicator current-step={currentStep}>
+                <lightning-progress-step
+                    label="Connected App"
+                    value="connected_app"
+                ></lightning-progress-step>
+                <lightning-progress-step
+                    label="GitLab Token"
+                    value="gitlab_token"
+                ></lightning-progress-step>
+                <lightning-progress-step
+                    label="Claim Branch"
+                    value="claim_branch"
+                ></lightning-progress-step>
+            </lightning-progress-indicator>
+            <lightning-button
+                if:true={isBackButtonVisible}
+                onclick={backStep}
+                disabled={isBackButtonDisabled}
+                label="Go Back"
+                class="button float-left"
+            ></lightning-button>
+            <lightning-button
+                if:true={isCheckButtonVisible}
+                onclick={checkStep}
+                disabled={isCheckButtonDisabled}
+                label={buttonLabel}
+                variant="brand"
+                class="button float-right"
+            ></lightning-button>
+        </div>
+    </lightning-card>
+</template>

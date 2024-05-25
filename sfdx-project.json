@@ -1,0 +1,19 @@
+{
+    "packageDirectories": [
+        {
+            "path": "force-app",
+            "package": "G-Force",
+            "versionName": "ver 0.2",
+            "versionNumber": "0.2.0.NEXT",
+            "versionDescription": "Allows to share org authentication with GitLab"
+        }
+    ],
+    "name": "g-force",
+    "namespace": "gfrc",
+    "sfdcLoginUrl": "https://login.salesforce.com",
+    "sourceApiVersion": "60.0",
+    "packageAliases": {
+        "G-Force": "0HoQy0000000B57KAE",
+        "G-Force@0.2.0-1": "04tQy0000001dNVIAY"
+    }
+}

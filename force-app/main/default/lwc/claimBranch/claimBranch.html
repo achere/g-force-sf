@@ -1,0 +1,66 @@
+<template>
+    <div class="slds-is-relative slds-grid slds-gutters_direct-large">
+        <div class="slds-col">
+            <lightning-input
+                lwc:ref="projectId"
+                type="text"
+                value={data.projectId}
+                onblur={handleChange}
+                disabled={isProjectFound}
+                name="projectId"
+                label="Project ID"
+                required
+                class="input"
+            ></lightning-input>
+            <lightning-button
+                onclick={findProject}
+                disabled={isProjectFound}
+                label={findProjectButtonLabel}
+                variant="brand"
+            ></lightning-button>
+        </div>
+
+        <div class="slds-col">
+            <div class="slds-grid slds-gutters">
+                <lightning-combobox
+                    options={branchOptions}
+                    value={data.branch}
+                    onchange={handleChange}
+                    disabled={isBranchInputDisabled}
+                    required
+                    label="Branch"
+                    name="branch"
+                    placeholder="Select Branch"
+                    class="input branch slds-col"
+                ></lightning-combobox>
+                <lightning-combobox
+                    options={apiVersionOptions}
+                    value={data.apiVersion}
+                    onchange={handleChange}
+                    disabled={isBranchInputDisabled}
+                    required
+                    label="Salesforce API Version"
+                    name="apiVersion"
+                    placeholder="Select Version"
+                    class="input branch slds-col"
+                ></lightning-combobox>
+            </div>
+            <div class="slds-grid slds-grid_align-spread">
+                <lightning-button
+                    onclick={claimBranch}
+                    disabled={isBranchInputDisabled}
+                    label={claimBranchLabel}
+                    variant="brand"
+                    class="slds-col"
+                ></lightning-button>
+                <div if:true={isBranchClaimed} class="slds-col">
+                    <lightning-icon
+                        icon-name="action:approval"
+                        size="x-small"
+                        alternative-text="Claimed"
+                    ></lightning-icon>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
